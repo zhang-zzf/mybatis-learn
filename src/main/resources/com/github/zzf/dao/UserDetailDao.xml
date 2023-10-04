@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.zzf.dao.UserDetailDao">
+    <insert id="insert">
+        insert into `user_detail` (`user_id`, `home_addr`, `work_addr`)
+        values (#{userId}, #{homeAddr}, #{workAddr})
+    </insert>
+
+    <!--<select id="getBy" resultType="com.feng.learn.model.UserDetail">-->
+    <select id="getBy" resultType="com.github.zzf.dao.model.UserDetail">
+        select *
+        from `user_detail`
+        where `user_id` = #{userId}
+    </select>
+</mapper>
