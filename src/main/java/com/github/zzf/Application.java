@@ -1,13 +1,10 @@
 package com.github.zzf;
 
-import com.github.zzf.dao.UserDao;
+import com.github.zzf.dao.DaoPackage;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
-import lombok.var;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -21,13 +18,14 @@ import javax.sql.DataSource;
  */
 @Slf4j
 @Configuration
-@ComponentScan(basePackageClasses = {PackageInfo.class})
-@MapperScan(basePackageClasses = {PackageInfo.class})
+@ComponentScan(basePackageClasses = {AppPackage.class})
+@MapperScan(basePackageClasses = {DaoPackage.class})
 public class Application {
 
     public static void main(String[] args) throws InterruptedException {
         log.info("Hello,World");
-        val context = new AnnotationConfigApplicationContext(Application.class);
+        // 启动 spring 容器
+        new AnnotationConfigApplicationContext(Application.class);
         Thread.currentThread().join();
     }
 
@@ -45,13 +43,6 @@ public class Application {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource());
         return factoryBean.getObject();
-    }
-
-    @Bean
-    public UserDao userMapper() throws Exception {
-        @SuppressWarnings("resource")
-        var sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
-        return sqlSessionTemplate.getMapper(UserDao.class);
     }
 
 }

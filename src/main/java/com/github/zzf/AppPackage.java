@@ -1,5 +1,5 @@
 package com.github.zzf;
 
-public class PackageInfo {
+public class AppPackage {
 
 }

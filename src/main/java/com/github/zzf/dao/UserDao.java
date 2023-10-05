@@ -9,7 +9,7 @@ import com.github.zzf.dao.model.User;
  */
 public interface UserDao {
 
-    User getBy(long id);
+    User getBy(Long id);
 
     int insert(User user);
 
